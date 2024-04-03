@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+
+        {
+            "name": "machinetask",
+            "request": "launch",
+            "program": "lib/main_dev.dart",
+            "type": "dart",   
+        },
+        {
+            "name": "NDS_App",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_dev.dart"
+        },
+        {
+            "name": "machinetask (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "machinetask (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
