@@ -1,0 +1,1 @@
+ C:\\Users\\asus\\Downloads\\machinetaskfaris\\.dart_tool\\flutter_build\\4f2785e27a316ba7032f5966a0352023\\native_assets.yaml: 

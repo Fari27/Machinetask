@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/src/base/base_page.dart';
 import 'package:sample/src/blocs/login_bloc/login_bloc.dart';
+import 'package:sample/src/constants/string_constants.dart';
 import 'package:sample/src/util/app_colors.dart';
 import 'package:sample/src/util/app_enums.dart';
 import 'package:sample/src/util/app_navigation.dart';
@@ -21,14 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController userIdTextField = TextEditingController();
 
   final TextEditingController pwdTextField = TextEditingController();
+  String? _errorText;
+  String? _usernameErrorText;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BasePage(
       body: _getBody(context),
-      padding: EdgeInsets.only(
-          left: AppWidgetSizes.dimen_20,
-          right: AppWidgetSizes.dimen_20,
-          top: AppWidgetSizes.dimen_20),
+      padding: EdgeInsets.only(top: AppWidgetSizes.dimen_20),
       menuRequired: false,
       appBarType: AppBarType.empty,
       preferredHeight: AppWidgetSizes.dimen_60,
@@ -48,8 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 150),
+              padding: const EdgeInsets.only(top: 100, right: 20, left: 20),
               child: Column(
+               
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Welcome Back',
@@ -71,123 +75,95 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             AppWidgetSizes.verticalSpace150,
             Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  height: AppWidgetSizes.dimen_50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Appcolors.textWhiteColor(context),
-                      boxShadow: [
-                        BoxShadow(
-                            color:
-                                Appcolors.textColor(context).withOpacity(0.1),
-                            blurRadius: 4,
-                            offset: const Offset(0.0, 0.75))
-                      ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: AppWidgetSizes.dimen_16,
-                        right: AppWidgetSizes.dimen_16),
-                    child: SizedBox(
-                      width: AppWidgetSizes.screenWidth(context) -
-                          AppWidgetSizes.dimen_16,
-                      height: AppWidgetSizes.dimen_60,
-                      child: Row(
+                Form(
+                  key: _formKey,
+                  child: Container(
+                    
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    decoration: BoxDecoration(color: Colors.blueAccent.withAlpha(40),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20, left: 20,top: 40),
+                      child: Column(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(right: 8),
-                            child: Icon(Icons.mail_outline_outlined),
+                          TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            onChanged: (val) {
+                              _pwdValidation(context: context);
+                            },
+                            validator: (value) {
+                              _usernameErrorText =
+                                  InputValidator.validateUsername(
+                                      value ?? '');
+                              return _usernameErrorText;
+                            },
+                            //  inputFormatters: InputValidator.userIdValidator(),
+                            cursorColor: Appcolors.blackColor,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            controller: userIdTextField,
+                            decoration: InputDecoration(
+                              
+                            filled: true,
+                            fillColor: Colors.white,
+                                errorText: _usernameErrorText,
+                                prefixIcon: Icon(Icons.mail_outline_outlined),
+                                labelStyle: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        color: Appcolors.textLightGrayColor(
+                                            context),
+                                        fontSize: AppWidgetSizes.fontSize14),
+                                border: InputBorder.none,
+                                hintText: 'Username'),
                           ),
-                          Expanded(
-                            child: TextFormField(
-                              enableInteractiveSelection: false,
-                              enableSuggestions: false,
-                              onChanged: (val) {
-                                _pwdValidation(context: context);
-                              },
-                               inputFormatters: InputValidator.userIdValidator(),
-                              cursorColor: Appcolors.blackColor,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              controller: userIdTextField,
-                              decoration: InputDecoration(
-                                  labelStyle: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                          color: Appcolors.textLightGrayColor(
-                                              context),
-                                          fontSize: AppWidgetSizes.fontSize14),
-                                  border: InputBorder.none,
-                                  labelText: 'Username'),
+                          AppWidgetSizes.verticalSpace20,
+                          TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            onChanged: (val) {
+                              _pwdValidation(context: context);
+                            },
+                            validator: (value) {
+                              _errorText = InputValidator.validatePassword(
+                                  value ?? '');
+                              return _errorText;
+                            },
+                            cursorColor: Appcolors.blackColor,
+                            controller: pwdTextField,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            obscureText: state.obsecureEnabled,
+                            maxLength: 15,
+                            decoration: InputDecoration(
+                                filled: true,
+                            fillColor: Colors.white,
+                              prefixIcon: Icon(Icons.key_sharp),
+                              errorText: _errorText,
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      color: Appcolors.textLightGrayColor(
+                                          context),
+                                      fontSize: AppWidgetSizes.fontSize14),
+                              hintText: 'Password',
+                              border: InputBorder.none,
+                              counterText: '',
                             ),
                           ),
+                          AppWidgetSizes.verticalSpace28,
+                          _loginButtonWidget(context: context),
+                          AppWidgetSizes.verticalSpace50,
                         ],
                       ),
                     ),
                   ),
                 ),
-                AppWidgetSizes.verticalSpace20,
-                Container(
-                  height: AppWidgetSizes.dimen_50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Appcolors.textWhiteColor(context),
-                      boxShadow: [
-                        BoxShadow(
-                            color:
-                                Appcolors.textColor(context).withOpacity(0.1),
-                            blurRadius: 4,
-                            offset: const Offset(0.0, 0.75))
-                      ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: AppWidgetSizes.dimen_16,
-                        right: AppWidgetSizes.dimen_16),
-                    child: SizedBox(
-                        width: AppWidgetSizes.screenWidth(context) -
-                            AppWidgetSizes.dimen_16,
-                        height: AppWidgetSizes.dimen_60,
-                        child: Row(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(right: 8),
-                              child: Icon(Icons.key_sharp),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                onChanged: (val) {
-                                  _pwdValidation(context: context);
-                                },
-                                // inputFormatters:
-                                //     InputValidator.passwordValidator(),
-                                cursorColor: Appcolors.blackColor,
-                                controller: pwdTextField,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                                obscureText: state.obsecureEnabled,
-                                maxLength: 15,
-                                decoration: InputDecoration(
-                                  labelStyle: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                          color: Appcolors.textLightGrayColor(
-                                              context),
-                                          fontSize: AppWidgetSizes.fontSize14),
-                                  labelText: 'Password',
-                                  border: InputBorder.none,
-                                  counterText: '',
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                ),
               ],
             ),
-            AppWidgetSizes.verticalSpace28,
-            _loginButtonWidget(context: context),
-            AppWidgetSizes.verticalSpace50,
           ],
         );
       },
@@ -213,22 +189,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: "Sign in",
                 buttonState: ElevatedButtonState.active,
                 onPressed: () {
-                  var arg = {
-                    "email": "nidhinnp@gmail.com",
-                    "password": "12345678Np",
-                  };
-                  context
-                      .read<LoginBloc>()
-                      .add(LoginRequestEvent(reqParams: arg));
-                      
+                  if (_formKey.currentState?.validate() ?? false) {
+                    var arg = {
+                      "email": userIdTextField.text,
+                      "password": pwdTextField.text,
+                    };
+                    context
+                        .read<LoginBloc>()
+                        .add(LoginRequestEvent(reqParams: arg));
+                  }
                 },
               )
             : ButtonWidget(
                 text: 'Sign in',
                 buttonState: ElevatedButtonState.disable,
-                onPressed: () {
-                 
-                },
+                onPressed: () {},
               );
       },
     );

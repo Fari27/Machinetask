@@ -6,7 +6,7 @@ class LoginRepository {
   Future<LoginModel> loginRequest({required dynamic postParams}) async {
     final Map<String, dynamic> resp = await ApiService()
         .postJSONRequest(url: ApiServiceUrls.login, requestBody: postParams);
-        print('resppp $resp');
+        
     return LoginModel.fromJson(resp);
     
   }

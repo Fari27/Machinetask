@@ -3,19 +3,20 @@ import 'package:sample/src/core/api_service.dart';
 import 'package:sample/src/models/add_employee_model.dart';
 import 'package:sample/src/models/designation_model.dart';
 import 'package:sample/src/models/get_employees_model.dart';
+import 'package:sample/src/util/results.dart';
 
 class EmployeeRepository {
-  Future<GetEmployeesModel> getEmployees() async {
+  Future<Result<Exception,GetEmployeesModel>> getEmployees() async {
     final Map<String, dynamic> resp = await ApiService()
         .getJSONRequestWithJWTToken(url: ApiServiceUrls.viewEmployees);
-    return GetEmployeesModel.fromJson(resp);
+    return Success(GetEmployeesModel.fromJson(resp));
   }
 
-  Future<AddEmployeesModel> addEmployees({required dynamic postParams}) async {
-    final Map<String, dynamic> resp = await ApiService()
+  Future<Result<Exception,AddEmployeesModel>> addEmployees({required dynamic postParams}) async {
+    dynamic  resp = await ApiService()
         .postRequestWithJWTToken(
             url: ApiServiceUrls.viewEmployees, requestBody: postParams);
-    return AddEmployeesModel.fromJson(resp);
+    return Success(AddEmployeesModel.fromJson(resp));
   }
 
   Future<DesignationModel> getDesignation() async {

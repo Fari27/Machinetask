@@ -17,19 +17,19 @@ class DesignationModel {
 }
 
 class Data {
-  int? currentPage;
+  num? currentPage;
   List<DesignationList>? data;
   String? firstPageUrl;
-  int? from;
-  int? lastPage;
+  num? from;
+  num? lastPage;
   String? lastPageUrl;
   List<Links>? links;
   String? nextPageUrl;
   String? path;
-  int? perPage;
+  num? perPage;
   Null prevPageUrl;
-  int? to;
-  int? total;
+  num? to;
+  num? total;
 
   Data(
       {this.currentPage,
@@ -96,7 +96,7 @@ class Data {
 }
 
 class DesignationList {
-  int? id;
+  num? id;
   String? name;
   Null deletedAt;
   String? createdAt;
@@ -147,7 +147,7 @@ class Links {
 }
 
 class GenderModel {
-  int? id;
+  num? id;
   String? name;
 
   GenderModel({this.id, this.name});

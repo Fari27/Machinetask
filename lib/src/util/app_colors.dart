@@ -46,6 +46,11 @@ abstract class Appcolors{
         
       ).getColor(context);
 
+   static Color loadingColor(BuildContext context) => ThemedColor(
+        light: LightTheme.textDarkBlueColor,
+       
+      ).getColor(context);
+
  
   static Color get textDarkBlueColor => const Color(0xFF081B63);
 

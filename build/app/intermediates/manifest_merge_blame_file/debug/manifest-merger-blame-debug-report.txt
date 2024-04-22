@@ -76,18 +76,36 @@
 67            android:name="flutterEmbedding"
 68            android:value="2" />
 69
-70        <uses-library
-70-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-71            android:name="androidx.window.extensions"
-71-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-72            android:required="false" />
-72-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-73        <uses-library
-73-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-74            android:name="androidx.window.sidecar"
-74-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-75            android:required="false" />
-75-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-76    </application>
-77
-78</manifest>
+70        <provider
+70-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+71            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+71-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+72            android:authorities="com.example.sample.flutter.image_provider"
+72-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+73            android:exported="false"
+73-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+74            android:grantUriPermissions="true" >
+74-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+75            <meta-data
+75-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+76                android:name="android.support.FILE_PROVIDER_PATHS"
+76-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+77                android:resource="@xml/flutter_image_picker_file_paths" />
+77-->[:image_picker] C:\Users\asus\Downloads\machinetaskfaris\build\image_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+78        </provider>
+79
+80        <uses-library
+80-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+81            android:name="androidx.window.extensions"
+81-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+82            android:required="false" />
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+83        <uses-library
+83-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+84            android:name="androidx.window.sidecar"
+84-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+85            android:required="false" />
+85-->[androidx.window:window:1.0.0-beta04] C:\Users\asus\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+86    </application>
+87
+88</manifest>

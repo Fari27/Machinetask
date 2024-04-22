@@ -30,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final LoginModel loginResponse =
           await (loginRepository ?? LoginRepository())
               .loginRequest(postParams: event.reqParams);
-      print('loginresponse  ${loginResponse}');
+    
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', event.reqParams["email"]);
       prefs.setString('jwtToken', loginResponse.data?.accessToken ?? '');

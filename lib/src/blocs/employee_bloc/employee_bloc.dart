@@ -10,11 +10,12 @@ part 'employee_event.dart';
 part 'employee_state.dart';
 
 class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
+   final EmployeeRepository? employeeRepository;
   List<GenderModel> genderList = [
     GenderModel(id: 1, name: 'male'),
     GenderModel(id: 2, name: 'female')
   ];
-  EmployeeBloc() : super(EmployeeInitial()) {
+  EmployeeBloc({this.employeeRepository}) : super(EmployeeInitial()) {
     on<GetEmployeeEvent>((event, emit) async {
       await _handleGetEmployee(event, emit);
     });
@@ -35,12 +36,21 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   Future<void> _handleGetEmployee(
       GetEmployeeEvent event, Emitter<EmployeeState> emit) async {
     try {
-      final GetEmployeesModel getEmployeesModel =
-          await EmployeeRepository().getEmployees();
+       emit(GetEmployeeState(status: ApiRequestStatus.loading));
 
-      emit(GetEmployeeState(
+      final  getEmployeesResponse =
+      await (employeeRepository ?? EmployeeRepository()).getEmployees();
+if(getEmployeesResponse.isSuccess()){
+   final employeesList = getEmployeesResponse.getSuccess()?.data?.data;
+   if(employeesList != null){
+emit(GetEmployeeState(
           status: ApiRequestStatus.success,
-          resp: getEmployeesModel.data?.data ?? []));
+          resp: employeesList)
+          );
+   }
+ 
+}
+     
     } catch (e) {
       print("object");
     }
@@ -49,11 +59,19 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   Future<void> _handleAddEmployee(
       AddEmployeeEvent event, Emitter<EmployeeState> emit) async {
     try {
-      final AddEmployeesModel employeeResponse =
+       emit(GetEmployeeState(status: ApiRequestStatus.loading));
+  
+      final  addemployeeResponse =
           await EmployeeRepository().addEmployees(postParams: event.reqParams);
+        
+if(addemployeeResponse.isSuccess()){
+   final addEmployeesModel = addemployeeResponse.getSuccess();
+   if(addEmployeesModel != null){
+emit(AddEmployeeState(
+          status: ApiRequestStatus.success, resp: addEmployeesModel));
+   }
 
-      emit(AddEmployeeState(
-          status: ApiRequestStatus.success, resp: employeeResponse));
+}
     } catch (e) {
       print("object");
     }

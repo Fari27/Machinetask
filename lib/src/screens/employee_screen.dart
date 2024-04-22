@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/src/base/base_page.dart';
@@ -50,9 +51,16 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
 
   _getBody(BuildContext context) {
     return BlocBuilder<EmployeeBloc, EmployeeState>(builder: (context, state) {
-      if (state is GetEmployeeState) {
-        employeesList = state.resp ?? [];
+      if(state.status.isLoading){
+         return SizedBox(
+              height: AppWidgetSizes.dimen_600,
+              child: Center(
+                child: CupertinoActivityIndicator(
+                    color: Appcolors.loadingColor(context)),
+              ));
       }
+      if (state is GetEmployeeState && state.status.isSuccess) {
+        employeesList = state.resp ?? [];
       return ListView.builder(
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),
@@ -114,6 +122,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
           );
         },
       );
+      }
+       return const SizedBox();
     });
   }
 }

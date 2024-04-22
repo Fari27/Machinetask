@@ -8,8 +8,8 @@ abstract class EmployeeState {
 class EmployeeInitial extends EmployeeState {}
 
 class GetEmployeeState extends EmployeeState {
-  List<EmployeesList> resp;
-  GetEmployeeState({required this.resp, super.status});
+  List<EmployeesList>? resp;
+  GetEmployeeState({ this.resp, super.status});
 }
 
 class AddEmployeeState extends EmployeeState {

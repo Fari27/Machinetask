@@ -17,19 +17,19 @@ class GetEmployeesModel {
 }
 
 class Data {
-  int? currentPage;
+  num? currentPage;
   List<EmployeesList>? data;
   String? firstPageUrl;
-  int? from;
-  int? lastPage;
+  num? from;
+  num? lastPage;
   String? lastPageUrl;
   List<Links>? links;
   String? nextPageUrl;
   String? path;
-  int? perPage;
+  num? perPage;
   String? prevPageUrl;
-  int? to;
-  int? total;
+  num? to;
+  num? total;
 
   Data(
       {this.currentPage,
@@ -96,15 +96,15 @@ class Data {
 }
 
 class EmployeesList {
-  int? id;
+  num? id;
   String? firstName;
   String? lastName;
   String? joinDate;
   String? dateOfBirth;
-  int? designationId;
+  num? designationId;
   String? gender;
-  int? mobile;
-  int? landline;
+  num? mobile;
+  num? landline;
   String? email;
   String? presentAddress;
   String? permanentAddress;
