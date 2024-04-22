@@ -67,6 +67,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+<<<<<<< HEAD
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
             android:authorities="com.example.sample.flutter.image_provider"
@@ -77,6 +78,8 @@
                 android:resource="@xml/flutter_image_picker_file_paths" />
         </provider>
 
+=======
+>>>>>>> 6054ea933790a3fde41396eaf7037c3380799d04
         <uses-library
             android:name="androidx.window.extensions"
             android:required="false" />
